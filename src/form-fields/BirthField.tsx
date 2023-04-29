@@ -49,13 +49,13 @@ export default function BirthField({
   onBirthMonthChange,
   birthDay,
   onBirthDayChange,
-}: BirthField) {
+}: BirthField): JSX.Element {
   return (
     <BaseField title="Születési hely és idő">
       <Stack
         direction={{ xs: "column", sm: "row" }}
         justifyContent="space-between"
-        spacing={{ xs: 1, sm: 2 }}
+        spacing={2}
         useFlexGap
       >
         <TextField

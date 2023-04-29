@@ -15,13 +15,13 @@ export default function NameField({
   onFullNameChange,
   nickName,
   onNickNameChange,
-}: NameField) {
+}: NameField): JSX.Element {
   return (
     <BaseField title="Név">
       <Stack
         direction={{ xs: "column", sm: "row" }}
         justifyContent="space-between"
-        spacing={{ xs: 1, sm: 2 }}
+        spacing={2}
         useFlexGap
       >
         <TextField

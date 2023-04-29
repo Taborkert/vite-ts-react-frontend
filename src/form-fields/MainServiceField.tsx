@@ -26,7 +26,7 @@ interface MainServiceField {
 export default function MainServiceField({
   value,
   onChange,
-}: MainServiceField) {
+}: MainServiceField): JSX.Element {
   return (
     <RadioGroup
       title="Milyen minőségben jössz a táborba?"

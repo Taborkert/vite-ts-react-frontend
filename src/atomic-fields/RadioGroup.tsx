@@ -18,7 +18,7 @@ export default function RadioGroup({
   value,
   onChange,
   radios,
-}: RadioGroupType) {
+}: RadioGroupType): JSX.Element {
   return (
     <BaseField title={title}>
       <FormControl>

@@ -11,7 +11,7 @@ interface AdvanceFeeField {
 export default function AdvanceFeeField({
   checked,
   onChange,
-}: AdvanceFeeField) {
+}: AdvanceFeeField): JSX.Element {
   return (
     <BaseField title="Táborelőleg: 9000 Ft">
       <FormControlLabel

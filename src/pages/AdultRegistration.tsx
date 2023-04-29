@@ -6,6 +6,7 @@ import MainServiceField, {
 import AdvanceFeeField from "../form-fields/AdvanceFeeField";
 import NameField from "../form-fields/NameField";
 import BirthField from "../form-fields/BirthField";
+import ContactField from "../form-fields/ContactField";
 
 interface Action {
   field: string;
@@ -26,6 +27,12 @@ interface AdultRegState {
   birthYear: string;
   birthMonth: string;
   birthDay: string;
+  zipCode: string;
+  city: string;
+  address: string;
+  phone: string;
+  email: string;
+  profession: string;
 }
 
 const defaultValues = {
@@ -37,9 +44,15 @@ const defaultValues = {
   birthYear: "",
   birthMonth: "",
   birthDay: "",
+  zipCode: "",
+  city: "",
+  address: "",
+  phone: "",
+  email: "",
+  profession: "",
 };
 
-export default function AdultRegistration() {
+export default function AdultRegistration(): JSX.Element {
   const [form, dispatchForm] = React.useReducer(
     reducer,
     defaultValues as AdultRegState
@@ -83,6 +96,20 @@ export default function AdultRegistration() {
         onBirthMonthChange={inputValueChangeHandler("birthMonth")}
         birthDay={form.birthDay}
         onBirthDayChange={inputValueChangeHandler("birthDay")}
+      />
+      <ContactField
+        zipCode={form.zipCode}
+        onZipCodeChange={inputValueChangeHandler("zipCode")}
+        city={form.city}
+        onCityChange={inputValueChangeHandler("city")}
+        address={form.address}
+        onAddressChange={inputValueChangeHandler("address")}
+        phone={form.phone}
+        onPhoneChange={inputValueChangeHandler("phone")}
+        email={form.email}
+        onEmailChange={inputValueChangeHandler("email")}
+        profession={form.profession}
+        onProfessionChange={inputValueChangeHandler("profession")}
       />
     </>
   );
