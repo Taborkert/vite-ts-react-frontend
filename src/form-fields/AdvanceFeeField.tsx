@@ -1,15 +1,14 @@
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
+import { ChangeEventHandler } from "react";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import BaseField from "../atomic-fields/BaseField";
 
-export default function AdvanceFee({
+export default function AdvanceFeeField({
   checked,
   onChange,
 }: {
   checked: boolean;
-  onChange: any;
+  onChange: ChangeEventHandler;
 }) {
   return (
     <BaseField title="Táborelőleg: 9000 Ft">

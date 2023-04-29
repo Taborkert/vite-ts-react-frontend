@@ -1,3 +1,4 @@
+import { ChangeEventHandler } from "react";
 import RadioGroup from "../atomic-fields/RadioGroup";
 
 export type MainServiceFieldValue =
@@ -22,7 +23,7 @@ export default function MainServiceField({
   onChange,
 }: {
   value: MainServiceFieldValue;
-  onChange: any;
+  onChange: ChangeEventHandler;
 }) {
   return (
     <RadioGroup

@@ -3,51 +3,45 @@ import Typography from "@mui/material/Typography";
 import MainServiceField, {
   MainServiceFieldValue,
 } from "../form-fields/MainServiceField";
-import AdvanceFee from "../form-fields/AdvanceFee";
-
-interface AdultReg {
-  mainService: MainServiceFieldValue;
-  advanceFee: boolean;
-}
+import AdvanceFeeField from "../form-fields/AdvanceFeeField";
+import NameField from "../form-fields/NameField";
 
 interface Action {
   field: string;
   value: any;
 }
 
-const reducer = (state: AdultReg, { field, value }: Action) => ({
+const reducer = (state: AdultRegState, { field, value }: Action) => ({
   ...state,
   [field]: value,
 });
 
+interface AdultRegState {
+  mainService: MainServiceFieldValue;
+  advanceFee: boolean;
+  fullName: string;
+  nickName: string;
+}
+
 const defaultValues = {
   mainService: "no-service",
   advanceFee: false,
+  fullName: "",
+  nickName: "",
 };
 
 export default function AdultRegistration() {
   const [form, dispatchForm] = React.useReducer(
     reducer,
-    defaultValues as AdultReg
+    defaultValues as AdultRegState
   );
 
-  const handleMainServiceChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    dispatchForm({
-      field: "mainService",
-      value: (event.target as HTMLInputElement).value as MainServiceFieldValue,
-    });
-  };
-
-  const handleAdvanceFeeChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    dispatchForm({
-      field: "advanceFee",
-      value: event.target.checked,
-    });
-  };
+  const inputValueChangeHandler =
+    (field: string, isRadio: boolean = false) =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const { checked, value } = event.target;
+      dispatchForm({ field, value: isRadio ? checked : value });
+    };
 
   return (
     <>
@@ -56,12 +50,21 @@ export default function AdultRegistration() {
       </Typography>
       <MainServiceField
         value={form.mainService}
-        onChange={handleMainServiceChange}
+        onChange={inputValueChangeHandler("mainService")}
       />
-      <AdvanceFee checked={form.advanceFee} onChange={handleAdvanceFeeChange} />
+      <AdvanceFeeField
+        checked={form.advanceFee}
+        onChange={inputValueChangeHandler("advanceFee", true)}
+      />
       <Typography variant="h4" component="h2" gutterBottom align="center">
         Általános adatok
       </Typography>
+      <NameField
+        fullName={form.fullName}
+        onFullNameChange={inputValueChangeHandler("fullName")}
+        nickName={form.nickName}
+        onNickNameChange={inputValueChangeHandler("nickName")}
+      />
     </>
   );
 }
