@@ -3,9 +3,11 @@ import Typography from "@mui/material/Typography";
 import MainServiceField, {
   MainServiceFieldValue,
 } from "../form-fields/MainServiceField";
+import AdvanceFee from "../form-fields/AdvanceFee";
 
 interface AdultReg {
   mainService: MainServiceFieldValue;
+  advanceFee: boolean;
 }
 
 interface Action {
@@ -21,6 +23,7 @@ const reducer = (state: AdultReg, { field, value }: Action) => ({
 function AdultRegistration() {
   const [form, dispatchForm] = React.useReducer(reducer, {
     mainService: "no-service",
+    advanceFee: false,
   });
 
   const handleMainServiceChange = (
@@ -29,6 +32,15 @@ function AdultRegistration() {
     dispatchForm({
       field: "mainService",
       value: (event.target as HTMLInputElement).value as MainServiceFieldValue,
+    });
+  };
+  
+  const handleAdvanceFeeChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    dispatchForm({
+      field: "advanceFee",
+      value: event.target.checked,
     });
   };
 
@@ -41,6 +53,7 @@ function AdultRegistration() {
         value={form.mainService}
         onChange={handleMainServiceChange}
       />
+      <AdvanceFee checked={form.advanceFee} onChange={handleAdvanceFeeChange} />
     </>
   );
 }
