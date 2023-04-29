@@ -20,11 +20,16 @@ const reducer = (state: AdultReg, { field, value }: Action) => ({
   [field]: value,
 });
 
-function AdultRegistration() {
-  const [form, dispatchForm] = React.useReducer(reducer, {
-    mainService: "no-service",
-    advanceFee: false,
-  });
+const defaultValues = {
+  mainService: "no-service",
+  advanceFee: false,
+};
+
+export default function AdultRegistration() {
+  const [form, dispatchForm] = React.useReducer(
+    reducer,
+    defaultValues as AdultReg
+  );
 
   const handleMainServiceChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -34,7 +39,7 @@ function AdultRegistration() {
       value: (event.target as HTMLInputElement).value as MainServiceFieldValue,
     });
   };
-  
+
   const handleAdvanceFeeChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -54,8 +59,9 @@ function AdultRegistration() {
         onChange={handleMainServiceChange}
       />
       <AdvanceFee checked={form.advanceFee} onChange={handleAdvanceFeeChange} />
+      <Typography variant="h4" component="h2" gutterBottom align="center">
+        Általános adatok
+      </Typography>
     </>
   );
 }
-
-export default AdultRegistration;

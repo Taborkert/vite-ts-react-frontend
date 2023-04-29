@@ -1,10 +1,10 @@
-import React from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import BaseField from "../atomic-fields/BaseField";
 
-function AdvanceFee({
+export default function AdvanceFee({
   checked,
   onChange,
 }: {
@@ -12,16 +12,11 @@ function AdvanceFee({
   onChange: any;
 }) {
   return (
-    <Box sx={{ my: 4 }}>
-      <Typography variant="h5" component="h2" gutterBottom>
-        Táborelőleg: 9000 Ft
-      </Typography>
+    <BaseField title="Táborelőleg: 9000 Ft">
       <FormControlLabel
         control={<Checkbox checked={checked} onChange={onChange} />}
         label="a helyi táborszervezőnek befizettem"
       />
-    </Box>
+    </BaseField>
   );
 }
-
-export default AdvanceFee;
