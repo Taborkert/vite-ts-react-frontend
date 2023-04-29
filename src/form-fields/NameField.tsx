@@ -3,17 +3,19 @@ import BaseField from "../atomic-fields/BaseField";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 
+interface NameField {
+  fullName: string;
+  onFullNameChange: ChangeEventHandler;
+  nickName: string;
+  onNickNameChange: ChangeEventHandler;
+}
+
 export default function NameField({
   fullName,
   onFullNameChange,
   nickName,
   onNickNameChange,
-}: {
-  fullName: string;
-  onFullNameChange: ChangeEventHandler;
-  nickName: string;
-  onNickNameChange: ChangeEventHandler;
-}) {
+}: NameField) {
   return (
     <BaseField title="Név">
       <Stack

@@ -18,13 +18,15 @@ const radios = [
   { value: "full", label: "Teljes idős munkatárs - 9.000 Ft" },
 ];
 
+interface MainServiceField {
+  value: MainServiceFieldValue;
+  onChange: ChangeEventHandler;
+}
+
 export default function MainServiceField({
   value,
   onChange,
-}: {
-  value: MainServiceFieldValue;
-  onChange: ChangeEventHandler;
-}) {
+}: MainServiceField) {
   return (
     <RadioGroup
       title="Milyen minőségben jössz a táborba?"

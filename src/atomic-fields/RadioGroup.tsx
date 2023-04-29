@@ -29,9 +29,10 @@ export default function RadioGroup({
         >
           {radios.map(({ value: subValue, label }) =>
             subValue == null ? (
-              <FormLabel>{label}</FormLabel>
+              <FormLabel key={label}>{label}</FormLabel>
             ) : (
               <FormControlLabel
+                key={subValue}
                 value={subValue}
                 control={<Radio />}
                 label={label}

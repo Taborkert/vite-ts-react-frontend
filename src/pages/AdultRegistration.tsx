@@ -5,6 +5,7 @@ import MainServiceField, {
 } from "../form-fields/MainServiceField";
 import AdvanceFeeField from "../form-fields/AdvanceFeeField";
 import NameField from "../form-fields/NameField";
+import BirthField from "../form-fields/BirthField";
 
 interface Action {
   field: string;
@@ -21,6 +22,10 @@ interface AdultRegState {
   advanceFee: boolean;
   fullName: string;
   nickName: string;
+  birthPlace: string;
+  birthYear: string;
+  birthMonth: string;
+  birthDay: string;
 }
 
 const defaultValues = {
@@ -28,6 +33,10 @@ const defaultValues = {
   advanceFee: false,
   fullName: "",
   nickName: "",
+  birthPlace: "",
+  birthYear: "",
+  birthMonth: "",
+  birthDay: "",
 };
 
 export default function AdultRegistration() {
@@ -64,6 +73,16 @@ export default function AdultRegistration() {
         onFullNameChange={inputValueChangeHandler("fullName")}
         nickName={form.nickName}
         onNickNameChange={inputValueChangeHandler("nickName")}
+      />
+      <BirthField
+        birthPlace={form.birthPlace}
+        onBirthPlaceChange={inputValueChangeHandler("birthPlace")}
+        birthYear={form.birthYear}
+        onBirthYearChange={inputValueChangeHandler("birthYear")}
+        birthMonth={form.birthMonth}
+        onBirthMonthChange={inputValueChangeHandler("birthMonth")}
+        birthDay={form.birthDay}
+        onBirthDayChange={inputValueChangeHandler("birthDay")}
       />
     </>
   );
