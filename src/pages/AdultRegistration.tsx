@@ -8,17 +8,27 @@ interface AdultReg {
   mainService: MainServiceFieldValue;
 }
 
+interface Action {
+  field: string;
+  value: any;
+}
+
+const reducer = (state: AdultReg, { field, value }: Action) => ({
+  ...state,
+  [field]: value,
+});
+
 function AdultRegistration() {
-  const [form, setForm] = React.useState<AdultReg>({
+  const [form, dispatchForm] = React.useReducer(reducer, {
     mainService: "no-service",
   });
 
   const handleMainServiceChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setForm({
-      mainService: (event.target as HTMLInputElement)
-        .value as MainServiceFieldValue,
+    dispatchForm({
+      field: "mainService",
+      value: (event.target as HTMLInputElement).value as MainServiceFieldValue,
     });
   };
 
