@@ -3,6 +3,8 @@ import BaseField from "../atomic-fields/BaseField";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import MenuItem from "@mui/material/MenuItem";
+import { useSessionStorage } from "usehooks-ts";
+import inputChangeHandler from "../libs/inputChangeHandler";
 
 type Select = { value: string; label: string };
 
@@ -29,27 +31,11 @@ const days = Array.from({ length: 31 }, (v, k) => {
   };
 });
 
-interface BirthField {
-  birthPlace: string;
-  onBirthPlaceChange: ChangeEventHandler;
-  birthYear: string;
-  onBirthYearChange: ChangeEventHandler;
-  birthMonth: string;
-  onBirthMonthChange: ChangeEventHandler;
-  birthDay: string;
-  onBirthDayChange: ChangeEventHandler;
-}
-
-export default function BirthField({
-  birthPlace,
-  onBirthPlaceChange,
-  birthYear,
-  onBirthYearChange,
-  birthMonth,
-  onBirthMonthChange,
-  birthDay,
-  onBirthDayChange,
-}: BirthField): JSX.Element {
+export default function BirthField(): JSX.Element {
+  const [birthPlace, setBirthPlace] = useSessionStorage("birthPlace", "");
+  const [birthYear, setBirthYear] = useSessionStorage("birthYear", "");
+  const [birthMonth, setBirthMonth] = useSessionStorage("birthMonth", "");
+  const [birthDay, setBirthDay] = useSessionStorage("birthDay", "");
   return (
     <BaseField title="Születési hely és idő">
       <Stack
@@ -61,7 +47,7 @@ export default function BirthField({
         <TextField
           label="Születési hely"
           value={birthPlace}
-          onChange={onBirthPlaceChange}
+          onChange={inputChangeHandler(setBirthPlace)}
           sx={{ width: "100%" }}
         />
         <Stack
@@ -75,14 +61,14 @@ export default function BirthField({
             label="év"
             type="number"
             value={birthYear}
-            onChange={onBirthYearChange}
+            onChange={inputChangeHandler(setBirthYear)}
             sx={{ width: "100%" }}
           />
           <TextField
             label="hónap"
             select
             value={birthMonth}
-            onChange={onBirthMonthChange}
+            onChange={inputChangeHandler(setBirthMonth)}
             sx={{ width: "100%" }}
           >
             {months.map(({ value, label }) => (
@@ -95,7 +81,7 @@ export default function BirthField({
             label="nap"
             select
             value={birthDay}
-            onChange={onBirthDayChange}
+            onChange={inputChangeHandler(setBirthDay)}
             sx={{ width: "100%" }}
           >
             {days.map(({ value, label }) => (

@@ -1,5 +1,6 @@
-import { ChangeEventHandler } from "react";
 import RadioGroup from "../atomic-fields/RadioGroup";
+import { useSessionStorage } from "usehooks-ts";
+import inputChangeHandler from "../libs/inputChangeHandler";
 
 export type MainServiceFieldValue =
   | "no-service"
@@ -18,20 +19,16 @@ const radios = [
   { value: "full", label: "Teljes idős munkatárs - 9.000 Ft" },
 ];
 
-interface MainServiceField {
-  value: MainServiceFieldValue;
-  onChange: ChangeEventHandler;
-}
-
-export default function MainServiceField({
-  value,
-  onChange,
-}: MainServiceField): JSX.Element {
+export default function MainServiceField(): JSX.Element {
+  const [mainService, setMainService] = useSessionStorage(
+    "mainService",
+    "no-service"
+  );
   return (
     <RadioGroup
       title="Milyen minőségben jössz a táborba?"
-      value={value}
-      onChange={onChange}
+      value={mainService}
+      onChange={inputChangeHandler(setMainService)}
       radios={radios}
     />
   );

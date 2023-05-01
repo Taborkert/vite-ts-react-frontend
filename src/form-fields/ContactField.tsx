@@ -1,37 +1,16 @@
-import { ChangeEventHandler } from "react";
 import BaseField from "../atomic-fields/BaseField";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
+import { useSessionStorage } from "usehooks-ts";
+import inputChangeHandler from "../libs/inputChangeHandler";
 
-interface ContactField {
-  zipCode: string;
-  onZipCodeChange: ChangeEventHandler;
-  city: string;
-  onCityChange: ChangeEventHandler;
-  address: string;
-  onAddressChange: ChangeEventHandler;
-  phone: string;
-  onPhoneChange: ChangeEventHandler;
-  email: string;
-  onEmailChange: ChangeEventHandler;
-  profession: string;
-  onProfessionChange: ChangeEventHandler;
-}
-
-export default function ContactField({
-  zipCode,
-  onZipCodeChange,
-  city,
-  onCityChange,
-  address,
-  onAddressChange,
-  phone,
-  onPhoneChange,
-  email,
-  onEmailChange,
-  profession,
-  onProfessionChange,
-}: ContactField): JSX.Element {
+export default function ContactField(): JSX.Element {
+  const [zipCode, setZipCode] = useSessionStorage("zipCode", "");
+  const [city, setCity] = useSessionStorage("city", "");
+  const [address, setAddress] = useSessionStorage("address", "");
+  const [phone, setPhone] = useSessionStorage("phone", "");
+  const [email, setEmail] = useSessionStorage("email", "");
+  const [profession, setProfession] = useSessionStorage("profession", "");
   return (
     <BaseField title="Elérhetőség">
       <>
@@ -52,20 +31,20 @@ export default function ContactField({
             <TextField
               label="Irányítószám"
               value={zipCode}
-              onChange={onZipCodeChange}
+              onChange={inputChangeHandler(setZipCode)}
               sx={{ width: "30%" }}
             />
             <TextField
               label="Település"
               value={city}
-              onChange={onCityChange}
+              onChange={inputChangeHandler(setCity)}
               sx={{ width: "70%" }}
             />
           </Stack>
           <TextField
             label="Cím többi része"
             value={address}
-            onChange={onAddressChange}
+            onChange={inputChangeHandler(setAddress)}
             sx={{ width: "100%" }}
           />
         </Stack>
@@ -80,21 +59,21 @@ export default function ContactField({
             label="Telefonszám"
             type="tel"
             value={phone}
-            onChange={onPhoneChange}
+            onChange={inputChangeHandler(setPhone)}
             sx={{ width: "100%" }}
           />
           <TextField
             label="E-mail"
             type="email"
             value={email}
-            onChange={onEmailChange}
+            onChange={inputChangeHandler(setEmail)}
             sx={{ width: "100%" }}
           />
         </Stack>
         <TextField
           label="Foglalkozás (nem kötelező megadni)"
           value={profession}
-          onChange={onProfessionChange}
+          onChange={inputChangeHandler(setProfession)}
           sx={{ width: "100%" }}
         />
       </>
