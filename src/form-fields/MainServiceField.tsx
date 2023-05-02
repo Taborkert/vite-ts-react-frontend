@@ -1,6 +1,5 @@
 import RadioGroup from "../atomic-fields/RadioGroup";
-import { useSessionStorage } from "usehooks-ts";
-import inputChangeHandler from "../libs/inputChangeHandler";
+import useSessionForm from "../hooks/useSessionForm";
 
 export type MainServiceFieldValue =
   | "no-service"
@@ -20,15 +19,12 @@ const radios = [
 ];
 
 export default function MainServiceField(): JSX.Element {
-  const [mainService, setMainService] = useSessionStorage(
-    "mainService",
-    "no-service"
-  );
+  const [mainService, handleMainService] = useSessionForm("mainService", null);
   return (
     <RadioGroup
       title="Milyen minőségben jössz a táborba?"
       value={mainService}
-      onChange={inputChangeHandler(setMainService)}
+      onChange={handleMainService}
       radios={radios}
     />
   );

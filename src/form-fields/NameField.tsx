@@ -1,12 +1,11 @@
 import BaseField from "../atomic-fields/BaseField";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
-import { useSessionStorage } from "usehooks-ts";
-import inputChangeHandler from "../libs/inputChangeHandler";
+import useSessionForm from "../hooks/useSessionForm";
 
 export default function NameField(): JSX.Element {
-  const [fullName, setFullName] = useSessionStorage("fullName", "");
-  const [nickName, setNickName] = useSessionStorage("nickName", "");
+  const [fullName, handleFullName] = useSessionForm("fullName", "");
+  const [nickName, handleNickName] = useSessionForm("nickName", "");
   return (
     <BaseField title="Név">
       <Stack
@@ -19,14 +18,14 @@ export default function NameField(): JSX.Element {
           label="Teljes név"
           placeholder="Pl. Kovács Jánosné"
           value={fullName}
-          onChange={inputChangeHandler(setFullName)}
+          onChange={handleFullName}
           sx={{ width: "100%" }}
         />
         <TextField
           label="Megszólítás"
           placeholder="Pl. Marika"
           value={nickName}
-          onChange={inputChangeHandler(setNickName)}
+          onChange={handleNickName}
           sx={{ width: "100%" }}
         />
       </Stack>

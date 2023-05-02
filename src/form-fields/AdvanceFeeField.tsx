@@ -13,11 +13,10 @@ import PaidIcon from "@mui/icons-material/Paid";
 import HouseSidingIcon from "@mui/icons-material/HouseSiding";
 import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
 import ChecklistRtlIcon from "@mui/icons-material/ChecklistRtl";
-import { useSessionStorage } from "usehooks-ts";
-import inputChangeHandler from "../libs/inputChangeHandler";
+import useSessionForm from "../hooks/useSessionForm";
 
 export default function AdvanceFeeField(): JSX.Element {
-  const [advanceFee, setAdvanceFee] = useSessionStorage("advanceFee", false);
+  const [advanceFee, handleAdvanceFee] = useSessionForm("advanceFee", false);
   return (
     <BaseField title="Tábori költségek">
       <>
@@ -31,10 +30,7 @@ export default function AdvanceFeeField(): JSX.Element {
           <ListItem sx={{ border: "3px dashed red" }}>
             <FormControlLabel
               control={
-                <Checkbox
-                  checked={advanceFee}
-                  onChange={inputChangeHandler(setAdvanceFee)}
-                />
+                <Checkbox checked={advanceFee} onChange={handleAdvanceFee} />
               }
               label="a helyi táborszervezőnek befizettem a táborelőleget"
               aria-describedby="advanced-fee-helper-text"

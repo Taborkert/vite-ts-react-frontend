@@ -3,39 +3,14 @@ import BaseField from "../atomic-fields/BaseField";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import MenuItem from "@mui/material/MenuItem";
-import { useSessionStorage } from "usehooks-ts";
-import inputChangeHandler from "../libs/inputChangeHandler";
-
-type Select = { value: string; label: string };
-
-const months: Select[] = [
-  { value: "01", label: "Január" },
-  { value: "02", label: "Február" },
-  { value: "03", label: "Március" },
-  { value: "04", label: "Április" },
-  { value: "05", label: "Május" },
-  { value: "06", label: "Június" },
-  { value: "07", label: "Július" },
-  { value: "08", label: "Augusztus" },
-  { value: "09", label: "Szeptember" },
-  { value: "10", label: "Október" },
-  { value: "11", label: "November" },
-  { value: "12", label: "December" },
-];
-
-const days = Array.from({ length: 31 }, (v, k) => {
-  const label = k + 1 + "";
-  return {
-    value: label.padStart(2, "0"),
-    label,
-  };
-});
+import { days, months } from "../libs/lists";
+import useSessionForm from "../hooks/useSessionForm";
 
 export default function BirthField(): JSX.Element {
-  const [birthPlace, setBirthPlace] = useSessionStorage("birthPlace", "");
-  const [birthYear, setBirthYear] = useSessionStorage("birthYear", "");
-  const [birthMonth, setBirthMonth] = useSessionStorage("birthMonth", "");
-  const [birthDay, setBirthDay] = useSessionStorage("birthDay", "");
+  const [birthPlace, handleBirthPlace] = useSessionForm("birthPlace", "");
+  const [birthYear, handleBirthYear] = useSessionForm("birthYear", "");
+  const [birthMonth, handleBirthMonth] = useSessionForm("birthMonth", "");
+  const [birthDay, handleBirthDay] = useSessionForm("birthDay", "");
   return (
     <BaseField title="Születési hely és idő">
       <Stack
@@ -47,7 +22,7 @@ export default function BirthField(): JSX.Element {
         <TextField
           label="Születési hely"
           value={birthPlace}
-          onChange={inputChangeHandler(setBirthPlace)}
+          onChange={handleBirthPlace}
           sx={{ width: "100%" }}
         />
         <Stack
@@ -61,14 +36,14 @@ export default function BirthField(): JSX.Element {
             label="év"
             type="number"
             value={birthYear}
-            onChange={inputChangeHandler(setBirthYear)}
+            onChange={handleBirthYear}
             sx={{ width: "100%" }}
           />
           <TextField
             label="hónap"
             select
             value={birthMonth}
-            onChange={inputChangeHandler(setBirthMonth)}
+            onChange={handleBirthMonth}
             sx={{ width: "100%" }}
           >
             {months.map(({ value, label }) => (
@@ -81,7 +56,7 @@ export default function BirthField(): JSX.Element {
             label="nap"
             select
             value={birthDay}
-            onChange={inputChangeHandler(setBirthDay)}
+            onChange={handleBirthDay}
             sx={{ width: "100%" }}
           >
             {days.map(({ value, label }) => (
