@@ -1,12 +1,6 @@
 import RadioGroup from "../atomic-fields/RadioGroup";
 import useSessionForm from "../hooks/useSessionForm";
 
-export type MainServiceFieldValue =
-  | "no-service"
-  | "attendant"
-  | "animator"
-  | "full";
-
 const radios = [
   {
     value: "no-service",

@@ -4,7 +4,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 
 interface BaseFieldType {
-  children: React.ReactElement;
+  children: React.ReactElement | React.ReactElement[];
   title: string;
 }
 

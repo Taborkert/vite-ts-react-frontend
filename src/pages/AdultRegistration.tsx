@@ -4,6 +4,7 @@ import AdvanceFeeField from "../form-fields/AdvanceFeeField";
 import NameField from "../form-fields/NameField";
 import BirthField from "../form-fields/BirthField";
 import ContactField from "../form-fields/ContactField";
+import AccommodationField from "../form-fields/AccommodationField";
 
 export default function AdultRegistration(): JSX.Element {
   return (
@@ -13,6 +14,7 @@ export default function AdultRegistration(): JSX.Element {
       </Typography>
       <MainServiceField />
       <AdvanceFeeField />
+      <AccommodationField />
       <Typography variant="h4" component="h2" gutterBottom align="center">
         Általános adatok
       </Typography>
